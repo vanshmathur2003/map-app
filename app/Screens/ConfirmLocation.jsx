@@ -56,19 +56,27 @@ const ConfirmLocation = () => {
     setFormData(prev => ({ ...prev, addressType: type }));
   };
 
+  const validatePhone = (phone) => {
+    return /^\d{10}$/.test(phone);
+  };
+
   const handleSaveAddress = async () => {
+    if (!validatePhone(formData.receiverPhone)) {
+      alert('Please enter a valid 10-digit phone number');
+      return;
+    }
     try {
       const addressData = {
         ...locationDetails,
         ...formData
       };
       await AsyncStorage.setItem('savedAddress', JSON.stringify(addressData));
-      console.log(addressData)
-      
+      console.log(addressData);
     } catch (error) {
       console.error('Error saving address:', error);
     }
   };
+
 
   return (
     <ScrollView className="flex-1 bg-white">

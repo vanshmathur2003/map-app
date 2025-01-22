@@ -17,9 +17,19 @@ const AddAddressManually = () => {
 
   const [isDefaultAddress, setIsDefaultAddress] = useState(false);
 
+  const validatePhone = (phone) => {
+    return /^\d{10}$/.test(phone);
+  };
+
   const handleConfirmLocation = () => {
+
+   if (!validatePhone(formData.mobile)) {
+      alert('Please enter a valid 10-digit phone number');
+      return;
+    }
     console.log('Form Data:', formData);
     console.log('Is Default Address:', isDefaultAddress);
+
   };
 
   return (
